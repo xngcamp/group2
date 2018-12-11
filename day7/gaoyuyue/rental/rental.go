@@ -1,6 +1,6 @@
 package rental
 
-import "github.com/xngcamp/group2/day7/movie"
+import "github.com/xngcamp/group2/day7/gaoyuyue/movie"
 
 type Rental struct {
 	Movie movie.Movie

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/xngcamp/group2/day7/customer"
-	"github.com/xngcamp/group2/day7/movie"
-	"github.com/xngcamp/group2/day7/rental"
+	"github.com/xngcamp/group2/day7/gaoyuyue/customer"
+	"github.com/xngcamp/group2/day7/gaoyuyue/movie"
+	"github.com/xngcamp/group2/day7/gaoyuyue/rental"
 )
 
 func main() {

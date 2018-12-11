@@ -2,7 +2,7 @@ package customer
 
 import (
 	"fmt"
-	"github.com/xngcamp/group2/day7/rental"
+	"github.com/xngcamp/group2/day7/gaoyuyue/rental"
 )
 
 type Customer struct {
