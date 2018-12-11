@@ -4,11 +4,19 @@ package movie
 
 //普通电影
 type OrdinaryMovie struct {
-	Movie
+	Title     string //片名
 }
 
+func (m *OrdinaryMovie) PutTitle(s string)()  {
+	m.Title=s
+}
+
+
+func (m *OrdinaryMovie) GetTitle() string {
+	return m.Title
+}
 //获取价格
-func (ordMovie *OrdinaryMovie) GetMoney(daysRented int) float64 {
+func (ordMovie *OrdinaryMovie) GetCharge(daysRented int) float64 {
 	result :=0.0
 	result += 2
 	if daysRented > 2 {
@@ -17,7 +25,7 @@ func (ordMovie *OrdinaryMovie) GetMoney(daysRented int) float64 {
 	return result
 }
 //获取积分
-func (ordMovie *OrdinaryMovie) GetPoints(daysRented int) int  {
+func (ordMovie *OrdinaryMovie) GetFrequentRenterPoints(daysRented int) int  {
 	return 1
 }
 
