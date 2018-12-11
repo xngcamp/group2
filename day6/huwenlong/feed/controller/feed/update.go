@@ -3,6 +3,7 @@ package feed
 import (
 	"camp/feed/service"
 	"encoding/json"
+	"github.com/globalsign/mgo/bson"
 	"net/http"
 
 	"camp/lib"
@@ -13,7 +14,7 @@ import (
 )
 
 type UpdateReq struct {
-	Id int64 `json:"id"`
+	Id bson.ObjectId `json:"id"`
 	Txt string `json:"txt"`
 }
 // Regular 用于参数校验
@@ -26,7 +27,7 @@ func (updateReq *UpdateReq) Regular() (ok bool) {
 	return
 }
 type UpdateResp struct {
-	Id int64 `json:"ret_id"`
+	Id bson.ObjectId `json:"ret_id"`
 	Txt string `json:"ret_txt"`
 }
 

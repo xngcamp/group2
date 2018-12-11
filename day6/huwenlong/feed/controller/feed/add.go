@@ -3,6 +3,7 @@ package feed
 import (
 	"camp/feed/service"
 	"encoding/json"
+	"github.com/globalsign/mgo/bson"
 	"net/http"
 
 	"camp/lib"
@@ -14,7 +15,7 @@ import (
 
 type AddReq struct {
 	Txt string `json:"txt"`
-	Id int64 `json:"id"`
+	Id bson.ObjectId `json:"id"`
 }
 // Regular 用于参数校验
 func (addReq *AddReq) Regular() (ok bool) {
@@ -25,11 +26,11 @@ func (addReq *AddReq) Regular() (ok bool) {
 	ok = true
 	return
 }
+//响应中传递的结构体
 type AddResp struct {
-	Id int64 `json:"ret_id"`
 	Txt string `json:"ret_txt"`
 }
-var feedid int64 = 0
+
 //Add just for demo
 //@postfilter("Boss")
 func (feed *Feed) Add( w http.ResponseWriter,r *http.Request)  {
@@ -44,15 +45,13 @@ func (feed *Feed) Add( w http.ResponseWriter,r *http.Request)  {
 	
 	feedApi := api.NewFeed()
 	feedApi.Txt = addReq.Txt
-	feedApi.Id = feedid
-	feedid++
+
 	if err := service.NewFeed().Add(feedApi); err != nil {
 		clog.Error("%s feed.Add err: %v, req: %v", fun, err, addReq)
 		feed.ReplyFail(w,lib.CodeSrv)
 		return
 	}
 	resp := &AddResp{
-		feedApi.Id,
 		feedApi.Txt,
 	}
 	feed.ReplyOk(w,resp)

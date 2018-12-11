@@ -4,10 +4,11 @@ import (
 	"camp/feed/api"
 	"camp/feed/model"
 	"fmt"
+	"github.com/globalsign/mgo/bson"
 )
 
 //Get定义获取操作
-func (feed *Feed) Get(id int64) (feedApi *api.Feed,err error) {
+func (feed *Feed) Get(id bson.ObjectId) (feedApi *api.Feed,err error) {
 	feedModel := model.NewFeed()
 	feedModel.Id = id
 
