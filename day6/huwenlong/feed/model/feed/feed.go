@@ -19,9 +19,13 @@ func (feed *Feed) Table() (table string) {
 }
 //GetC 返回db name
 func (feed *Feed) GetC() (c *mgo.Collection) {
+	//初始化数据库与表的名称
 	db,table := feed.Db(), feed.Table()
+	//连接数据库
 	session := mongo.DBS[db]
 	sessionCopy := session.Copy()
+	//创建表
 	c = sessionCopy.DB(db).C(table)
+	//返回当前表的集合
 	return
 }

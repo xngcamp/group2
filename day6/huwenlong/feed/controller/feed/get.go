@@ -5,29 +5,27 @@ import (
 	"camp/lib"
 	"encoding/json"
 	"fmt"
+	"github.com/globalsign/mgo/bson"
 	"github.com/simplejia/clog/api"
 	"net/http"
 )
 
 type GetReq struct {
-	ID int64 `json:"id"`
+	ID bson.ObjectId `json:"id"`
 } 
 
 func (getReq *GetReq) Regular() (ok bool) {
 	if getReq == nil {
 		return 
 	}
-	
-	if getReq.ID <= 0 {
-		return 
-	}
+
 	ok = true
 	return 
 }
 
 type GetResp struct {
 	//Feed *api.Feed `json:"feed,omitempty"`
-	Id int64 `json:"ret_id"`
+	Id bson.ObjectId `json:"ret_id"`
 	Txt string `json:"ret_txt"`
 } 
 

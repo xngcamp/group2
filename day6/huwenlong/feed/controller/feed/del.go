@@ -5,19 +5,17 @@ import (
 	"camp/lib"
 	"encoding/json"
 	"fmt"
+	"github.com/globalsign/mgo/bson"
 	"github.com/simplejia/clog/api"
 	"net/http"
 )
 
 type DelReq struct {
-	ID int64 `json:"id"`
+	ID bson.ObjectId `json:"id"`
 }
-
+//接受的数据的判断
 func (delReq *DelReq) Regular() (ok bool) {
 	if delReq == nil{
-		return
-	}
-	if delReq.ID <=0 {
 		return
 	}
 	ok = true
@@ -48,11 +46,11 @@ func (feed *Feed) Del(w http.ResponseWriter,r *http.Request) {
 		return
 	}
 
-	if feedApi == nil{
-		deltail := "feed not found"
-		feed.ReplyFailWithDetail(w,lib.CodePara,deltail)
-		return
-	}
+	//if feedApi.Id == nil {
+	//	deltail := "feed not found"
+	//	feed.ReplyFailWithDetail(w,lib.CodePara,deltail)
+	//	return
+	//}
 
 	if err := service.NewFeed().Del(delReq.ID); err != nil{
 		clog.Error("%s param err: %v, req: %v", fun, err, delReq)
