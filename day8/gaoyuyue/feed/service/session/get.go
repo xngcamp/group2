@@ -28,7 +28,7 @@ func (s *Session) GetById(id string) (sessionApi *api.Session, err error) {
 	if err != nil {
 		return
 	}
-	sessionModel.Timeout = sessionModel.Timeout.Add(duration)
+	sessionModel.Timeout = time.Now().Add(duration)
 	err = sessionModel.Update()
 	if err != nil {
 		return

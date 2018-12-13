@@ -5,11 +5,15 @@ import (
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/model"
 )
 
-func (f *Feed) Update(feed *api.Feed) error {
+func (f *Feed) Update(feed *api.Feed) (err error) {
 	modelFeed := model.NewFeed()
-	if err := modelFeed.GetById(feed.Id); err != nil {
-		return err
+	if err = modelFeed.GetById(feed.Id); err != nil {
+		return
 	}
 	modelFeed.Content = feed.Content
-	return modelFeed.Update()
+	err = modelFeed.Update()
+	if err != nil {
+		return
+	}
+	return
 }

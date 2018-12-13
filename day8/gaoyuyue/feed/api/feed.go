@@ -9,7 +9,7 @@ type Feed struct {
 	Id bson.ObjectId `json:"id" bson:"_id"`
 	Title string `json:"title"`
 	Content string `json:"content"`
-	//Author string `json:"author"`
+	UserId bson.ObjectId `json:"user_id"`
 	CreateTime time.Time `json:"create_time"`
 }
 

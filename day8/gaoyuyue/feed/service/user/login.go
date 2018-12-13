@@ -4,10 +4,9 @@ import (
 	"errors"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/api"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/model"
-	"gopkg.in/mgo.v2/bson"
 )
 
-func (u *User) Login(userApi *api.User) (userId bson.ObjectId, err error) {
+func (u *User) Login(userApi *api.User) (err error) {
 	userModel := model.NewUser()
 	userModel.Email = userApi.Email
 	err = userModel.GetByEmail()
@@ -23,6 +22,6 @@ func (u *User) Login(userApi *api.User) (userId bson.ObjectId, err error) {
 		err = errors.New("password is invalid")
 		return
 	}
-	userId = userModel.Id
+	userApi.Id = userModel.Id
 	return
 }

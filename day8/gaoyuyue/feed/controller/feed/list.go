@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-// @postfilter("Cors")
+// @postfilter("Boss")
 func (f *Feed) List(w http.ResponseWriter, r *http.Request) {
 	feeds, err := service.NewFeed().List()
 	if err != nil {

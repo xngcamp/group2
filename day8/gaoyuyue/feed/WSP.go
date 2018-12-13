@@ -65,6 +65,57 @@ func init() {
 		c.Update(w, r)
 	})
 
+	http.HandleFunc("/user/get_fans_users", func(w http.ResponseWriter, r *http.Request) {
+		t := time.Now()
+		_ = t
+		var e interface{}
+		c := new(user.User)
+		defer func() {
+			e = recover()
+			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_fans_users"}); !ok {
+				return
+			}
+		}()
+		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_fans_users"}); !ok {
+			return
+		}
+		c.GetFansUsers(w, r)
+	})
+
+	http.HandleFunc("/user/get_sub_users", func(w http.ResponseWriter, r *http.Request) {
+		t := time.Now()
+		_ = t
+		var e interface{}
+		c := new(user.User)
+		defer func() {
+			e = recover()
+			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_sub_users"}); !ok {
+				return
+			}
+		}()
+		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_sub_users"}); !ok {
+			return
+		}
+		c.GetSubUsers(w, r)
+	})
+
+	http.HandleFunc("/user/list_one", func(w http.ResponseWriter, r *http.Request) {
+		t := time.Now()
+		_ = t
+		var e interface{}
+		c := new(user.User)
+		defer func() {
+			e = recover()
+			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/list_one"}); !ok {
+				return
+			}
+		}()
+		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/list_one"}); !ok {
+			return
+		}
+		c.ListOne(w, r)
+	})
+
 	http.HandleFunc("/user/login", func(w http.ResponseWriter, r *http.Request) {
 		t := time.Now()
 		_ = t
@@ -104,7 +155,27 @@ func init() {
 				return
 			}
 		}()
+		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/sub_user"}); !ok {
+			return
+		}
 		c.SubUser(w, r)
+	})
+
+	http.HandleFunc("/user/unsub_user", func(w http.ResponseWriter, r *http.Request) {
+		t := time.Now()
+		_ = t
+		var e interface{}
+		c := new(user.User)
+		defer func() {
+			e = recover()
+			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/unsub_user"}); !ok {
+				return
+			}
+		}()
+		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/unsub_user"}); !ok {
+			return
+		}
+		c.UnsubUser(w, r)
 	})
 
 	http.HandleFunc("/user/update", func(w http.ResponseWriter, r *http.Request) {

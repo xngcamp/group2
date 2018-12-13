@@ -7,12 +7,17 @@ import (
 	"time"
 )
 
-func (f *Feed) Add(feed *api.Feed) error {
-	modelFeed := model.NewFeed()
-	feed.Id = bson.NewObjectId()
-	feed.CreateTime = time.Now()
-	modelFeed.Id = feed.Id
-	modelFeed.Content = feed.Content
-	modelFeed.CreateTime = feed.CreateTime
-	return modelFeed.Add()
+func (f *Feed) Add(feedApi *api.Feed) (err error) {
+	feedModel := model.NewFeed()
+	feedApi.Id = bson.NewObjectId()
+	feedApi.CreateTime = time.Now()
+	feedModel.Id = feedApi.Id
+	feedModel.Content = feedApi.Content
+	feedModel.UserId = feedApi.UserId
+	feedModel.CreateTime = feedApi.CreateTime
+	err = feedModel.Add()
+	if err != nil {
+		return
+	}
+	return
 }

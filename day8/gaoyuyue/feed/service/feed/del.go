@@ -5,8 +5,12 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-func (f *Feed) DelById(id string) error {
+func (f *Feed) DelById(id bson.ObjectId) (err error) {
 	modelFeed := model.NewFeed()
-	modelFeed.Id = bson.ObjectIdHex(id)
-	return modelFeed.Del()
+	modelFeed.Id = id
+	err = modelFeed.Del()
+	if err != nil {
+		return
+	}
+	return
 }

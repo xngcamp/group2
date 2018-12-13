@@ -9,17 +9,32 @@ import (
 	"net/http"
 )
 
-// @postfilter("Cors")
+type AddReq struct {
+	Txt string `json:"txt"`
+}
+
+// @postfilter("Boss")
+// @prefilter("Auth")
 func (f *Feed) Add(w http.ResponseWriter, r *http.Request)  {
-	fun := "controller.feed.Add"
-	var feed api.Feed
-	if err := json.Unmarshal(f.ReadBody(r), &feed); err != nil {
-		clog.Error("%s param err: %v, req: %v", fun, err, feed)
+	fn := "controller.feed.Add"
+	addReq := &AddReq{}
+	if err := json.Unmarshal(f.ReadBody(r), addReq); err != nil {
+		clog.Error("%s param err: %v, req: %v", fn, err, addReq)
 		f.ReplyFail(w, lib.CodePara)
 		return
 	}
-	if err := service.NewFeed().Add(&feed); err != nil {
+	session, ok := f.GetParam("session")
+	if !ok {
 		f.ReplyFail(w, lib.CodePara)
+		clog.Error(fn+"-> Error: don't get session")
+		return
+	}
+
+	feed := api.NewFeed()
+	feed.UserId = session.(*api.Session).UserId
+	feed.Content = addReq.Txt
+	if err := service.NewFeed().Add(feed); err != nil {
+		f.ReplyFail(w, lib.CodeSrv)
 		return
 	}
 	f.ReplyOk(w, feed)

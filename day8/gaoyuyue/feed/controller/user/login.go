@@ -39,14 +39,13 @@ func (u *User) Login(w http.ResponseWriter, r *http.Request) {
 	userApi.Email = loginReq.Email
 	userApi.Password = loginReq.Password
 	userService := service.NewUser()
-	userId, err := userService.Login(userApi)
-	if err != nil {
+	if err := userService.Login(userApi); err != nil {
 		u.ReplyFailWithDetail(w, lib.CodePara, err.Error())
 		clog.Error(fn + "-> Error: %v", err)
 		return
 	}
 	sessionService := service.NewSession()
-	sessionApi, err := sessionService.Add(userId)
+	sessionApi, err := sessionService.Add(userApi.Id)
 	if err != nil {
 		u.ReplyFail(w, lib.CodePara)
 		clog.Error(fn + "-> Error: %v", err)
