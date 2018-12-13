@@ -8,7 +8,7 @@ import (
 func (user *User) Update(apiUser *api.User) (err error) {
 	userModel := model.NewUser()
 	userModel.Token = apiUser.Token
-	userModel,err = userModel.FindOne()
+	userModel,err = userModel.FindOneById()
 	if err != nil || userModel==nil{
 		return
 	}
