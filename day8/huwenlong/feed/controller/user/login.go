@@ -35,7 +35,7 @@ func (user *User) Login(w http.ResponseWriter, r *http.Request)  {
 
 	var loginReq *LoginReq
 	fmt.Println("pre",loginReq)
-	if err := json.Unmarshal(user.ReadBody(r),&loginReq); err != nil {
+	if err := json.Unmarshal(user.ReadBody(r),&loginReq); err != nil || !loginReq.Regular(){
 		clog.Error("%s param err: %v, req: %v", fun, err, loginReq)
 		user.ReplyFail(w,lib.CodeSrv)
 		return
