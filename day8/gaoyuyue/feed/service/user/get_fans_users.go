@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/api"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/model"
 	"gopkg.in/mgo.v2/bson"
@@ -9,12 +10,14 @@ import (
 func (u *User) GetFansUsers(userId bson.ObjectId) (apiUsers []*api.User, err error) {
 	userModel := model.NewUser()
 	userModel.Id = userId
-	err = userModel.GetById()
-	if err != nil {
-		return
-	}
+	//err = userModel.GetById()
+	//if err != nil {
+	//	return
+	//}
 	apiUsers = make([]*api.User, 0)
-	modelUsers, e := userModel.GetUsersByIds(userModel.Followers)
+	//modelUsers, e := userModel.GetUsersByIds(userModel.Followers)
+	modelUsers, e := userModel.GetFansById()
+	fmt.Println(modelUsers)
 	if e != nil {
 		err = e
 		return

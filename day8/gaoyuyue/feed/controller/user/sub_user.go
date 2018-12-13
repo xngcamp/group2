@@ -2,7 +2,6 @@ package user
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/simplejia/clog/api"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/api"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/service"
@@ -36,8 +35,15 @@ func (u *User) SubUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	userService := service.NewUser()
-	if err := userService.AddSub(session.(*api.Session).UserId, subReq.NeedSubUid); err != nil {
-		fmt.Println(err)
+	userId := session.(*api.Session).UserId
+	subId := subReq.NeedSubUid
+	if userId == subId {
+		u.ReplyFail(w, lib.CodePara)
+		u.ReplyFailWithDetail(w, lib.CodePara, "不能关注自己")
+		clog.Error(fn + "-> Error: userId == subId")
+		return
+	}
+ 	if err := userService.AddSub(userId, subId); err != nil {
 		u.ReplyFail(w, lib.CodeSrv)
 		clog.Error(fn + "-> Error: %v", err)
 		return

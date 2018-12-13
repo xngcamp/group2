@@ -16,6 +16,9 @@ func init() {
 		c := new(feed.Feed)
 		defer func() {
 			e = recover()
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/add"}); !ok {
+				return
+			}
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/add"}); !ok {
 				return
 			}
@@ -33,6 +36,9 @@ func init() {
 		c := new(feed.Feed)
 		defer func() {
 			e = recover()
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/del"}); !ok {
+				return
+			}
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/del"}); !ok {
 				return
 			}
@@ -50,6 +56,9 @@ func init() {
 		c := new(feed.Feed)
 		defer func() {
 			e = recover()
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/list"}); !ok {
+				return
+			}
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/list"}); !ok {
 				return
 			}
@@ -64,6 +73,9 @@ func init() {
 		c := new(feed.Feed)
 		defer func() {
 			e = recover()
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/update"}); !ok {
+				return
+			}
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/update"}); !ok {
 				return
 			}
@@ -84,6 +96,9 @@ func init() {
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_fans_users"}); !ok {
 				return
 			}
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_fans_users"}); !ok {
+				return
+			}
 		}()
 		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_fans_users"}); !ok {
 			return
@@ -101,6 +116,9 @@ func init() {
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_sub_users"}); !ok {
 				return
 			}
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_sub_users"}); !ok {
+				return
+			}
 		}()
 		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/get_sub_users"}); !ok {
 			return
@@ -116,6 +134,9 @@ func init() {
 		defer func() {
 			e = recover()
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/list_one"}); !ok {
+				return
+			}
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/list_one"}); !ok {
 				return
 			}
 		}()
@@ -152,6 +173,9 @@ func init() {
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/register"}); !ok {
 				return
 			}
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/register"}); !ok {
+				return
+			}
 		}()
 		c.Register(w, r)
 	})
@@ -163,6 +187,9 @@ func init() {
 		c := new(user.User)
 		defer func() {
 			e = recover()
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/sub_user"}); !ok {
+				return
+			}
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/sub_user"}); !ok {
 				return
 			}
@@ -180,6 +207,9 @@ func init() {
 		c := new(user.User)
 		defer func() {
 			e = recover()
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/unsub_user"}); !ok {
+				return
+			}
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/unsub_user"}); !ok {
 				return
 			}
@@ -197,6 +227,9 @@ func init() {
 		c := new(user.User)
 		defer func() {
 			e = recover()
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/update"}); !ok {
+				return
+			}
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/update"}); !ok {
 				return
 			}

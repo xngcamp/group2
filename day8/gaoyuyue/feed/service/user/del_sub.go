@@ -16,9 +16,9 @@ func (u *User) DelSub(userId bson.ObjectId, subUserId bson.ObjectId) (err error)
 	if err = userModel.DelSub(subUserId); err != nil {
 		return
 	}
-	if err = subUserModel.DelFans(userId); err != nil {
-		return
-	}
+	//if err = subUserModel.DelFans(userId); err != nil {
+	//	return
+	//}
 	return
 }
 
