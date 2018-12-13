@@ -8,6 +8,8 @@ type User struct {
 	Password string `json:"password"`
 	Sex int `json:"sex"`
 	Email string `json:"email"`
+	Followers []bson.ObjectId `json:"followers"`
+	Following []bson.ObjectId `json:"following"`
 }
 
 func NewUser() *User {

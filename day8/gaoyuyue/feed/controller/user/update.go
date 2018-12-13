@@ -15,6 +15,8 @@ type UpdateReq struct {
 	UpdateInfo *api.User `json:"update_info"`
 }
 
+type UpdateInfo api.User
+
 type UpdateResp struct {
 }
 
@@ -28,7 +30,6 @@ func (u *User) Update(w http.ResponseWriter, r *http.Request)  {
 		clog.Error(fn + "-> Error: %v", err)
 		return
 	}
-	fmt.Println(updateReq.UpdateInfo)
 	sessionService := service.NewSession()
 	sessionApi, err := sessionService.GetById(updateReq.Token)
 	if err != nil {
@@ -38,7 +39,6 @@ func (u *User) Update(w http.ResponseWriter, r *http.Request)  {
 		return
 	}
 	updateReq.UpdateInfo.Id = sessionApi.UserId
-	fmt.Println(updateReq.UpdateInfo)
 	userService := service.NewUser()
 	if err := userService.Update(updateReq.UpdateInfo); err != nil {
 		fmt.Println(err)

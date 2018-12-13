@@ -10,20 +10,20 @@ import (
 )
 
 type LoginReq struct {
-	Email string
-	Password string
+	Email string `json:"email"`
+	Password string `json:"password"`
 }
 
 func (loginReq *LoginReq) Regular() (ok bool) {
 	//todo
-	if loginReq == nil {
+	if loginReq == nil || loginReq.Email == "" || loginReq.Password == "" {
 		return
 	}
 	return true
 }
 
 type LoginResp struct {
-	Token string
+	Token string `json:"token"`
 }
 
 // @postfilter("Cors")

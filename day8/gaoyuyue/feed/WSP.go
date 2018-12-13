@@ -93,6 +93,17 @@ func init() {
 		c.Register(w, r)
 	})
 
+	http.HandleFunc("/user/sub_user", func(w http.ResponseWriter, r *http.Request) {
+		t := time.Now()
+		_ = t
+		var e interface{}
+		c := new(user.User)
+		defer func() {
+			e = recover()
+		}()
+		c.SubUser(w, r)
+	})
+
 	http.HandleFunc("/user/update", func(w http.ResponseWriter, r *http.Request) {
 		t := time.Now()
 		_ = t
@@ -104,6 +115,9 @@ func init() {
 				return
 			}
 		}()
+		if ok := filter.Login(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/update"}); !ok {
+			return
+		}
 		c.Update(w, r)
 	})
 

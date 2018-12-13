@@ -18,8 +18,9 @@ type RegisterReq struct {
 }
 
 func (registerReq *RegisterReq) Regular() (ok bool) {
-	//todo
-	if registerReq == nil {
+	//todo emial正则匹配，nick字数限制
+	if registerReq == nil || registerReq.Email == "" || registerReq.Password == "" ||
+		registerReq.Sex < 1 || registerReq.Sex > 2 || registerReq.Nick == ""{
 		return
 	}
 	return true
