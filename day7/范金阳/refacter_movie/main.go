@@ -29,18 +29,24 @@ func main() {
 
 	var rental1 rental.Rental
 	//m1 := movie.OrdinaryMovie{movie.Movie{Title: "Star Wars", PriceCode: movie.REGULAR}}
-	movie1 := movie.Movie{Title: "Star Wars", PriceCode: movie.REGULAR}
+	//movie1 := movie.Movie{Title: "Star Wars", PriceCode: movie.REGULAR}
+	//var movie1 movie.Movie
+	movie1 :=new(movie.OrdinaryMovie)
+	movie1.PutTitle("Star Wars")
 	//movie1 := m1.Movie
 	rental1.Init(movie1, 3)
 	aCustomer.AddRental(rental1)
 
 	var rental2 rental.Rental
-	movie2 := movie.Movie{Title: "The Godfather Part II", PriceCode: movie.NEW_RELEASE}
+	//movie2 := movie.Movie{Title: "The Godfather Part II", PriceCode: movie.NEW_RELEASE}
+	movie2 := new(movie.NewMovie)
+	movie2.PutTitle("The Godfather Part II")
 	rental2.Init(movie2, 1)
 	aCustomer.AddRental(rental2)
 
 	var rental3 rental.Rental
-	movie3 := movie.Movie{Title: "Casablanca", PriceCode: movie.CHILDRES}
+	movie3 := new(movie.ChildMovie)
+	movie3.PutTitle("Casablanca")
 	rental3.Init(movie3, 7)
 	aCustomer.AddRental(rental3)
 

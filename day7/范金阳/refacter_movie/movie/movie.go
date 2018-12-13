@@ -6,18 +6,24 @@ const (
 	CHILDRES           // 2
 )
 
-type Movie struct {
-	Title     string //片名
-	PriceCode int    //价格代号
+type Movie interface {
+	GetCharge(daysRented int) float64
+	GetFrequentRenterPoints(daysRented int) int
+	GetTitle() string
+	PutTitle(s string)
+
+	//
+	//Title     string //片名
+	//PriceCode int    //价格代号
 }
 
-func (m Movie) GetTitle() string {
-	return m.Title
-}
-
-func (m Movie) GetPriceCode() int {
-	return m.PriceCode
-}
+//func (m Movie) GetTitle() string {
+//	return m.Title
+//}
+//
+//func (m Movie) GetPriceCode() int {
+//	return m.PriceCode
+//}
 
 //func (m Movie) GetCharge(daysRented int) float64 {
 //	result := 0.0
@@ -47,33 +53,33 @@ func (m Movie) GetPriceCode() int {
 //}
 
 
-
-//获取消费价格
-func (m Movie) GetCharge(daysRented int) float64 {
-	result := 0.0
-	var kind  MovieKind
-	switch m.GetPriceCode() {
-	case REGULAR:
-		kind = new(OrdinaryMovie)
-	case NEW_RELEASE:
-		kind = new(NewMovie)
-	case CHILDRES:
-		kind = new(ChildMovie)
-	}
-	result += kind.GetMoney(daysRented)
-	return result
-}
-
-//获取积分
-func (m Movie) GetFrequentRenterPoints(daysRented int) int {
-	var kind  MovieKind
-	switch m.GetPriceCode() {
-	case REGULAR:
-		kind = new(OrdinaryMovie)
-	case NEW_RELEASE:
-		kind = new(NewMovie)
-	case CHILDRES:
-		kind = new(ChildMovie)
-	}
-	return kind.GetPoints(daysRented)
-}
+//
+////获取消费价格
+//func (m Movie) GetCharge(daysRented int) float64 {
+//	result := 0.0
+//	var kind  MovieKind
+//	switch m.GetPriceCode() {
+//	case REGULAR:
+//		kind = new(OrdinaryMovie)
+//	case NEW_RELEASE:
+//		kind = new(NewMovie)
+//	case CHILDRES:
+//		kind = new(ChildMovie)
+//	}
+//	result += kind.GetMoney(daysRented)
+//	return result
+//}
+//
+////获取积分
+//func (m Movie) GetFrequentRenterPoints(daysRented int) int {
+//	var kind  MovieKind
+//	switch m.GetPriceCode() {
+//	case REGULAR:
+//		kind = new(OrdinaryMovie)
+//	case NEW_RELEASE:
+//		kind = new(NewMovie)
+//	case CHILDRES:
+//		kind = new(ChildMovie)
+//	}
+//	return kind.GetPoints(daysRented)
+//}
