@@ -26,7 +26,7 @@ type LoginResp struct {
 	Token string `json:"token"`
 }
 
-// @postfilter("Cors")
+// @postfilter(["Cors","Boss"])
 func (u *User) Login(w http.ResponseWriter, r *http.Request) {
 	fn := "controller.user.Login"
 	loginReq := &LoginReq{}

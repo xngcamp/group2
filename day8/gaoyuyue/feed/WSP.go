@@ -72,9 +72,6 @@ func init() {
 		c := new(user.User)
 		defer func() {
 			e = recover()
-			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/login"}); !ok {
-				return
-			}
 		}()
 		c.Login(w, r)
 	})
@@ -115,7 +112,7 @@ func init() {
 				return
 			}
 		}()
-		if ok := filter.Login(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/update"}); !ok {
+		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/update"}); !ok {
 			return
 		}
 		c.Update(w, r)

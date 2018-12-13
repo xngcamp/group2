@@ -21,6 +21,7 @@ type UpdateResp struct {
 }
 
 // @postfilter("Cors")
+// @prefilter("Auth")
 func (u *User) Update(w http.ResponseWriter, r *http.Request)  {
 	fn := "controller.user.Update"
 	updateReq := &UpdateReq{UpdateInfo:&api.User{}}
@@ -30,15 +31,22 @@ func (u *User) Update(w http.ResponseWriter, r *http.Request)  {
 		clog.Error(fn + "-> Error: %v", err)
 		return
 	}
-	sessionService := service.NewSession()
-	sessionApi, err := sessionService.GetById(updateReq.Token)
-	if err != nil {
+	//sessionService := service.NewSession()
+	//sessionApi, err := sessionService.GetById(updateReq.Token)
+	//if err != nil {
+	//	u.ReplyFail(w, lib.CodePara)
+	//	fmt.Println(err)
+	//	clog.Error(fn+"-> Error: %v", err)
+	//	return
+	//}
+	session, ok := u.GetParam("session")
+	if !ok {
 		u.ReplyFail(w, lib.CodePara)
-		fmt.Println(err)
-		clog.Error(fn+"-> Error: %v", err)
+		clog.Error(fn+"-> Error: don't get session")
 		return
 	}
-	updateReq.UpdateInfo.Id = sessionApi.UserId
+
+	updateReq.UpdateInfo.Id = session.(*api.Session).UserId
 	userService := service.NewUser()
 	if err := userService.Update(updateReq.UpdateInfo); err != nil {
 		fmt.Println(err)
