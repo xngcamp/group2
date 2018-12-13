@@ -26,26 +26,7 @@ func (addReq *UpdateReq) Regular() (ok bool){
 		fmt.Println(">>>>>>>>>>>1")
 		return
 	}
-	if addReq.Sex != 1 && addReq.Sex!= 2 {
-		fmt.Println(">>>>>>>>>>>2")
-		return
-	}
-	if addReq.Password ==""||strings.Trim(addReq.Password," ")=="" {
-		fmt.Println(">>>>>>>>>>>3")
-		return
-	}
-	if addReq.Nick ==""||strings.Trim(addReq.Nick," ")=="" {
-		fmt.Println(">>>>>>>>>>>4")
-		return
-	}
-	if addReq.Email ==""||strings.Trim(addReq.Email," ")=="" {
-		fmt.Println(">>>>>>>>>>>5")
-		return
-	}
-	if addReq.Token ==""{
-		fmt.Println(">>>>>>>>>>>5")
-		return
-	}
+	
 	ok = true
 	return
 }
