@@ -16,6 +16,7 @@ type SubResp struct {
 
 }
 
+// @postfilter("Boss")
 func (u *User) SubUser(w http.ResponseWriter, r *http.Request) {
 	fn := "controller.user.SubUser"
 	subReq := &SubReq{}
