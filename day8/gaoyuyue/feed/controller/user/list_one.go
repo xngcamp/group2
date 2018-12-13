@@ -23,7 +23,7 @@ type ListOneResp struct {
 }
 
 // @prefilter("Auth")
-// @postfilter("Boss")
+// @postfilter("Boss","Cors")
 func (u *User) ListOne(w http.ResponseWriter, r *http.Request)  {
 	fn := "controller.user.ListOne"
 	fmt.Println(fn)

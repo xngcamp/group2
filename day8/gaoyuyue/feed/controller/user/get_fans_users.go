@@ -13,7 +13,7 @@ type FansUsersResp struct {
 }
 
 // @prefilter("Auth")
-// @postfilter("Boss")
+// @postfilter("Boss","Cors")
 func (u *User) GetFansUsers(w http.ResponseWriter, r *http.Request)  {
 	fn := "controller.user.GetFanUsers"
 

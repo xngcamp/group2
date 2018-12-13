@@ -16,10 +16,13 @@ func init() {
 		c := new(feed.Feed)
 		defer func() {
 			e = recover()
-			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/add"}); !ok {
+			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/add"}); !ok {
 				return
 			}
 		}()
+		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/add"}); !ok {
+			return
+		}
 		c.Add(w, r)
 	})
 
@@ -30,10 +33,13 @@ func init() {
 		c := new(feed.Feed)
 		defer func() {
 			e = recover()
-			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/del"}); !ok {
+			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/del"}); !ok {
 				return
 			}
 		}()
+		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/del"}); !ok {
+			return
+		}
 		c.Del(w, r)
 	})
 
@@ -44,7 +50,7 @@ func init() {
 		c := new(feed.Feed)
 		defer func() {
 			e = recover()
-			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/list"}); !ok {
+			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/list"}); !ok {
 				return
 			}
 		}()
@@ -58,10 +64,13 @@ func init() {
 		c := new(feed.Feed)
 		defer func() {
 			e = recover()
-			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/update"}); !ok {
+			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/update"}); !ok {
 				return
 			}
 		}()
+		if ok := filter.Auth(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/feed/update"}); !ok {
+			return
+		}
 		c.Update(w, r)
 	})
 
@@ -124,6 +133,9 @@ func init() {
 		defer func() {
 			e = recover()
 			if ok := filter.Boss(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/login"}); !ok {
+				return
+			}
+			if ok := filter.Cors(w, r, map[string]interface{}{"__T__": t, "__C__": c, "__E__": e, "__P__": "/user/login"}); !ok {
 				return
 			}
 		}()

@@ -13,7 +13,7 @@ type AddReq struct {
 	Txt string `json:"txt"`
 }
 
-// @postfilter("Boss")
+// @postfilter("Cors","Boss")
 // @prefilter("Auth")
 func (f *Feed) Add(w http.ResponseWriter, r *http.Request)  {
 	fn := "controller.feed.Add"

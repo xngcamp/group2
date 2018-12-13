@@ -30,7 +30,7 @@ type RegisterResp struct {
 
 }
 
-// @postfilter("Boss")
+// @postfilter("Boss","Cors")
 func (u *User) Register(w http.ResponseWriter, r *http.Request)  {
 	fn := "controller.user.Register"
 

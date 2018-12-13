@@ -13,7 +13,7 @@ type SubUsersResp struct {
 }
 
 // @prefilter("Auth")
-// @postfilter("Boss")
+// @postfilter("Boss","Cors")
 func (u *User) GetSubUsers(w http.ResponseWriter, r *http.Request)  {
 	fn := "controller.user.GetSubUsers"
 	session, ok := u.GetParam("session")

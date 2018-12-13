@@ -17,7 +17,7 @@ type UpdateResp struct {
 
 }
 
-// @postfilter("Boss")
+// @postfilter("Cors","Boss")
 // @prefilter("Auth")
 func (f *Feed) Update(w http.ResponseWriter, r *http.Request)  {
 	fun := "controller.feed.Update"

@@ -20,10 +20,9 @@ type SubResp struct {
 }
 
 // @prefilter("Auth")
-// @postfilter("Boss")
+// @postfilter("Cors","Boss")
 func (u *User) SubUser(w http.ResponseWriter, r *http.Request) {
 	fn := "controller.user.SubUser"
-	fmt.Println(fn)
 	subReq := &SubReq{}
 	if err := json.Unmarshal(u.ReadBody(r), subReq); err != nil {
 		u.ReplyFail(w, lib.CodePara)
@@ -31,24 +30,18 @@ func (u *User) SubUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	session, ok := u.GetParam("session")
-	fmt.Println(session)
 	if !ok {
 		u.ReplyFail(w, lib.CodePara)
 		clog.Error(fn + "-> Error: don't get session")
 		return
 	}
-	fmt.Println("start add sub")
 	userService := service.NewUser()
-	fmt.Println("session-----")
-	fmt.Println(session.(*api.Session))
-	fmt.Println(session.(*api.Session).UserId)
 	if err := userService.AddSub(session.(*api.Session).UserId, subReq.NeedSubUid); err != nil {
 		fmt.Println(err)
 		u.ReplyFail(w, lib.CodeSrv)
 		clog.Error(fn + "-> Error: %v", err)
 		return
 	}
-	fmt.Println("end add sub")
 	subResp := &SubResp{}
 	u.ReplyOk(w, subResp)
 }

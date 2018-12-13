@@ -17,7 +17,7 @@ type DelResp struct {
 
 }
 
-// @postfilter("Boss")
+// @postfilter("Cors","Boss")
 // @prefilter("Auth")
 func (f *Feed) Del(w http.ResponseWriter, r *http.Request)  {
 	fn := "controller.feed.Del"

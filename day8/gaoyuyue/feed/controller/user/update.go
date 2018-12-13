@@ -20,7 +20,7 @@ type UpdateInfo api.User
 type UpdateResp struct {
 }
 
-// @postfilter("Boss")
+// @postfilter("Cors","Boss")
 // @prefilter("Auth")
 func (u *User) Update(w http.ResponseWriter, r *http.Request)  {
 	fn := "controller.user.Update"

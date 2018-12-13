@@ -19,7 +19,7 @@ type UnsubResp struct {
 }
 
 // @prefilter("Auth")
-// @postfilter("Boss")
+// @postfilter("Cors","Boss")
 func (u *User) UnsubUser(w http.ResponseWriter, r *http.Request) {
 	fn := "controller.user.UnsubUser"
 	unsubReq := &UnsubReq{}
