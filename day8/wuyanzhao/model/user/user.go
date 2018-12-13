@@ -4,14 +4,21 @@ Package user just for demo
 package user
 
 import (
-	"camp/user/api"
 	"camp/user/mongo"
+
+	"github.com/globalsign/mgo/bson"
 
 	mgo "github.com/globalsign/mgo"
 )
 
 // UserModel 定义db对应的类型
-type UserModel api.UserApi
+type UserModel struct {
+	ID       bson.ObjectId `json:"id" bson:"_id"`
+	Nick     string        `json:"nick" bson:"_nick"`         //用户名
+	Sex      byte          `json:"sex" bson:"_sex"`           //性别 1|2
+	Email    string        `json:"email" bson:"_email"`       //电子邮箱
+	Password string        `json:"password" bson:"_password"` //密码
+}
 
 // Db 返回db name
 func (userModel *UserModel) Db() (db string) {

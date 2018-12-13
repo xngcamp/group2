@@ -6,13 +6,15 @@ package user
 import (
 	"camp/user/mongo"
 
+	"github.com/globalsign/mgo/bson"
+
 	mgo "github.com/globalsign/mgo"
 )
 
 // LoginModel 定义db对应的类型
 type LoginModel struct {
-	Usertoken string `json:"usertoken" bson:"_usertoken"`
-	UserID    string `json:"userid" bson:"_userid"`
+	Usertoken string        `json:"usertoken" bson:"_usertoken"`
+	UserID    bson.ObjectId `json:"userid" bson:"_userid"`
 }
 
 // Db 返回db name
