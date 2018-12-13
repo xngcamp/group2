@@ -20,3 +20,19 @@ func (user *User) FindOne()(userSet *User, err error){
 	}
 	return
 }
+
+func (user *User) FindOneById()(userSet *User, err error){
+	c := user.GetC()
+
+
+	defer c.Database.Session.Close()
+	err = c.Find(bson.M{"_id":user.Token}).One(&userSet)
+	if err != nil{
+		if err != mgo.ErrNotFound {
+			return
+		}
+		err = nil
+		return
+	}
+	return
+}
