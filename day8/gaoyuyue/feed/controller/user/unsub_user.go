@@ -28,14 +28,17 @@ func (u *User) UnsubUser(w http.ResponseWriter, r *http.Request) {
 		clog.Error(fn + "-> Error: %v", err)
 		return
 	}
-	session, ok := u.GetParam("session")
+	//session, ok := u.GetParam("session")
+	token, ok := u.GetParam("token")
 	if !ok {
 		u.ReplyFail(w, lib.CodePara)
 		clog.Error(fn + "-> Error: don't get session")
 		return
 	}
+	//userId := session.(*api.Session).UserId
+	userId := token.(*api.Token).UserId
 	userService := service.NewUser()
-	if err := userService.DelSub(session.(*api.Session).UserId, unsubReq.NeedUnsubUid); err != nil {
+	if err := userService.DelSub(userId, unsubReq.NeedUnsubUid); err != nil {
 		u.ReplyFail(w, lib.CodeSrv)
 		clog.Error(fn + "-> Error: %v", err)
 		return

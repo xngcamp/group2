@@ -7,6 +7,7 @@ package model
 import (
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/model/feed"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/model/session"
+	"github.com/xngcamp/group2/day8/gaoyuyue/feed/model/token"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/model/user"
 )
 
@@ -20,4 +21,8 @@ func NewUser() *user.User {
 
 func NewSession() *session.Session {
 	return &session.Session{}
+}
+
+func NewToken() *token.Token {
+	return &token.Token{}
 }

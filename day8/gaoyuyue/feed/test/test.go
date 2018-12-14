@@ -2,12 +2,12 @@
 package test
 
 import (
+	"github.com/xngcamp/group2/day8/gaoyuyue/feed/conf"
+	"github.com/xngcamp/group2/day8/gaoyuyue/lib"
 	"time"
 
 	"github.com/simplejia/lc"
-	"xxx.com/lib"
 
-	"xxx.com/skel/conf"
 )
 
 const (

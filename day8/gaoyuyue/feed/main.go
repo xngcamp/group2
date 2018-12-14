@@ -6,15 +6,15 @@
 
 package main
 
-import (
+import  (
 	"fmt"
+	"github.com/xngcamp/group2/day8/gaoyuyue/feed/conf"
+	"github.com/xngcamp/group2/day8/gaoyuyue/lib"
 	"net/http"
 
 	"github.com/simplejia/clog/api"
 	"github.com/simplejia/lc"
 	"github.com/simplejia/utils"
-	"xxx.com/lib"
-	"xxx.com/skel/conf"
 )
 
 func init() {

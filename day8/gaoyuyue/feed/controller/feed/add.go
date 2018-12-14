@@ -23,15 +23,18 @@ func (f *Feed) Add(w http.ResponseWriter, r *http.Request)  {
 		f.ReplyFail(w, lib.CodePara)
 		return
 	}
-	session, ok := f.GetParam("session")
+	//session, ok := f.GetParam("session")
+	token, ok := f.GetParam("token")
 	if !ok {
 		f.ReplyFail(w, lib.CodePara)
-		clog.Error(fn+"-> Error: don't get session")
+		clog.Error(fn + "-> Error: don't get session")
 		return
 	}
+	//userId := session.(*api.Session).UserId
+	userId := token.(*api.Token).UserId
 
 	feed := api.NewFeed()
-	feed.UserId = session.(*api.Session).UserId
+	feed.UserId = userId
 	feed.Content = addReq.Txt
 	if err := service.NewFeed().Add(feed); err != nil {
 		f.ReplyFail(w, lib.CodeSrv)

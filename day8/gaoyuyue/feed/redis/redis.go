@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"xxx.com/skel/conf"
+	"github.com/xngcamp/group2/day8/gaoyuyue/feed/conf"
 
 	"github.com/garyburd/redigo/redis"
 	"github.com/simplejia/clog/api"

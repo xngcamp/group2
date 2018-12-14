@@ -17,13 +17,15 @@ type FansUsersResp struct {
 func (u *User) GetFansUsers(w http.ResponseWriter, r *http.Request)  {
 	fn := "controller.user.GetFanUsers"
 
-	session, ok := u.GetParam("session")
+	//session, ok := u.GetParam("session")
+	token, ok := u.GetParam("token")
 	if !ok {
 		u.ReplyFail(w, lib.CodePara)
 		clog.Error(fn + "-> Error: don't get session")
 		return
 	}
-	userId := session.(*api.Session).UserId
+	//userId := session.(*api.Session).UserId
+	userId := token.(*api.Token).UserId
 	userService := service.NewUser()
 	apiUsers, err := userService.GetFansUsers(userId)
 	if err != nil {

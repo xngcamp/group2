@@ -2,7 +2,6 @@ package user
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/simplejia/clog/api"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/api"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/service"
@@ -47,7 +46,6 @@ func (u *User) Register(w http.ResponseWriter, r *http.Request)  {
 	userApi.Password = addReq.Password
 	userApi.Sex = addReq.Sex
 
-	fmt.Println(userApi)
 	userService := service.NewUser()
 	if err := userService.Register(userApi); err != nil {
 		u.ReplyFailWithDetail(w, lib.CodePara, err.Error())

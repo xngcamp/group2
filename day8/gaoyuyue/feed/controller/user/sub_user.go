@@ -28,14 +28,16 @@ func (u *User) SubUser(w http.ResponseWriter, r *http.Request) {
 		clog.Error(fn + "-> Error: %v", err)
 		return
 	}
-	session, ok := u.GetParam("session")
+	//session, ok := u.GetParam("session")
+	token, ok := u.GetParam("token")
 	if !ok {
 		u.ReplyFail(w, lib.CodePara)
 		clog.Error(fn + "-> Error: don't get session")
 		return
 	}
+	//userId := session.(*api.Session).UserId
+	userId := token.(*api.Token).UserId
 	userService := service.NewUser()
-	userId := session.(*api.Session).UserId
 	subId := subReq.NeedSubUid
 	if userId == subId {
 		u.ReplyFail(w, lib.CodePara)

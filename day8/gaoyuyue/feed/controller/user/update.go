@@ -31,14 +31,16 @@ func (u *User) Update(w http.ResponseWriter, r *http.Request)  {
 		clog.Error(fn + "-> Error: %v", err)
 		return
 	}
-	session, ok := u.GetParam("session")
+	//session, ok := u.GetParam("session")
+	token, ok := u.GetParam("token")
 	if !ok {
 		u.ReplyFail(w, lib.CodePara)
-		clog.Error(fn+"-> Error: don't get session")
+		clog.Error(fn + "-> Error: don't get session")
 		return
 	}
-
-	updateReq.UpdateInfo.Id = session.(*api.Session).UserId
+	//userId := session.(*api.Session).UserId
+	userId := token.(*api.Token).UserId
+	updateReq.UpdateInfo.Id = userId
 	userService := service.NewUser()
 	if err := userService.Update(updateReq.UpdateInfo); err != nil {
 		fmt.Println(err)

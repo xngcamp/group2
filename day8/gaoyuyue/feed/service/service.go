@@ -7,6 +7,7 @@ package service
 import  (
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/service/feed"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/service/session"
+	"github.com/xngcamp/group2/day8/gaoyuyue/feed/service/token"
 	"github.com/xngcamp/group2/day8/gaoyuyue/feed/service/user"
 )
 
@@ -20,4 +21,8 @@ func NewUser() *user.User {
 
 func NewSession() *session.Session {
 	return &session.Session{}
+}
+
+func NewToken() *token.Token {
+	return &token.Token{}
 }

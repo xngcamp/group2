@@ -6,6 +6,7 @@ package mongo
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/xngcamp/group2/day8/gaoyuyue/feed/conf"
 	"io/ioutil"
 	"log"
 	"os"
@@ -15,7 +16,7 @@ import (
 	"github.com/globalsign/mgo"
 
 	"github.com/simplejia/utils"
-	"xxx.com/skel/conf"
+
 )
 
 // Conf 用于mongo连接配置

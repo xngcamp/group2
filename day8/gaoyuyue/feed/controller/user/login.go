@@ -44,14 +44,19 @@ func (u *User) Login(w http.ResponseWriter, r *http.Request) {
 		clog.Error(fn + "-> Error: %v", err)
 		return
 	}
-	sessionService := service.NewSession()
-	sessionApi, err := sessionService.Add(userApi.Id)
+	//sessionService := service.NewSession()
+	//sessionApi, err := sessionService.Add(userApi.Id)
+	tokenService := service.NewToken()
+	tokenApi := api.NewToken()
+	tokenApi.UserId = userApi.Id
+	err := tokenService.Set(tokenApi)
 	if err != nil {
 		u.ReplyFail(w, lib.CodePara)
 		clog.Error(fn + "-> Error: %v", err)
 		return
 	}
-	token := sessionApi.Id.Hex()
+	//token := sessionApi.Id.Hex()
+	token := tokenApi.Id.Hex()
 	loginResp := &LoginResp{}
 	loginResp.Token = token
 	u.ReplyOk(w, loginResp)

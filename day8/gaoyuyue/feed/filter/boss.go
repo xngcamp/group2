@@ -1,12 +1,11 @@
 package filter
 
 import (
+	"github.com/xngcamp/group2/day8/gaoyuyue/feed/conf"
+	"github.com/xngcamp/group2/day8/gaoyuyue/lib"
 	"net/http"
 	"runtime/debug"
 	"time"
-
-	"xxx.com/lib"
-	"xxx.com/skel/conf"
 
 	"github.com/simplejia/clog/api"
 )
